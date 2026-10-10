@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#203c3c" />
+    <meta
+      name="description"
+      content="LETITREE 磁吸匹克球：一颗可以陪你上场、收纳与收藏的球搭子。"
+    />
+    <meta property="og:title" content="LETITREE 磁吸匹克球" />
+    <meta
+      property="og:description"
+      content="球有归位，搭子到位。"
+    />
+    <meta property="og:image" content="assets/hero.png" />
+    <title>LETITREE｜磁吸匹克球</title>
+    <style>
+      :root {
+        --ink: #183b42;
+        --ink-soft: #31535a;
+        --cream: #fbfaf5;
+        --paper: #f2f0e8;
+        --purple: #dbd2f6;
+        --purple-deep: #675487;
+        --lime: #c8ed39;
+        --lime-deep: #8ea814;
+        --coral: #f39c82;
+        --line: rgba(24, 59, 66, 0.16);
+        --shadow: 0 22px 55px rgba(24, 59, 66, 0.13);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      button { font: inherit; }
+      img { display: block; max-width: 100%; }
+      ::selection { background: var(--lime); color: var(--ink); }
+
+      .site-shell { overflow: clip; }
+      .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .eyebrow::before {
+        width: 24px;
+        height: 7px;
+        border-radius: 20px;
+        background: var(--lime);
+        content: "";
+      }
+
+      .masthead {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 25px 0;
+      }
+      .masthead-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: inline-block;
+        position: relative;
+        padding-bottom: 9px;
+        color: var(--ink);
+        font-size: clamp(23px, 2.6vw, 31px);
+        font-weight: 900;
+        letter-spacing: -.06em;
+        line-height: 1;
+      }
+      .brand::after {
+        position: absolute;
+        bottom: 0;
+        left: 3px;
+        width: 63%;
+        height: 6px;
+        border-radius: 99px;
+        background: var(--lime);
+        content: "";
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .nav-links a { transition: opacity .2s ease; }
+      .nav-links a:hover { opacity: .62; }
+      .nav-cta {
+        padding: 10px 15px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+      }
+      .menu-button {
+        display: none;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--ink);
+        border-radius: 50%;
+        color: var(--ink);
+        background: rgba(251, 250, 245, .75);
+        cursor: pointer;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 740px;
+        padding: 161px 0 74px;
+        background:
+          radial-gradient(circle at 88% 4%, #ddd3f8 0 19%, transparent 19.15%),
+          radial-gradient(circle at 4% 89%, #dcebc9 0 12%, transparent 12.15%),
+          var(--cream);
+      }
+      .hero::after {
+        position: absolute;
+        top: 160px;
+        right: 0;
+        width: 39vw;
+        height: 1px;
+        background: var(--line);
+        content: "";
+      }
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: .9fr 1.1fr;
+        align-items: center;
+        gap: clamp(30px, 6vw, 91px);
+      }
+      .hero-copy { max-width: 510px; }
+      .hero .eyebrow { margin-bottom: 23px; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        max-width: 500px;
+        margin-bottom: 25px;
+        font-size: clamp(52px, 6.1vw, 84px);
+        font-weight: 900;
+        letter-spacing: -.09em;
+        line-height: .98;
+      }
+      h1 span { color: var(--purple-deep); }
+      .hero-description {
+        max-width: 390px;
+        margin-bottom: 34px;
+        color: var(--ink-soft);
+        font-size: 17px;
+        line-height: 1.75;
+      }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 20px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 800;
+        transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 0 rgba(24, 59, 66, .14);
+      }
+      .button-primary { background: var(--ink); color: white; }
+      .button-light { background: rgba(251, 250, 245, .78); }
+      .arrow { margin-left: 11px; font-size: 20px; line-height: 0; }
+      .hero-note {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 34px;
+        color: var(--ink-soft);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .hero-note::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--coral);
+        content: "";
+      }
+
+      .hero-visual { position: relative; }
+      .hero-image-wrap {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(24, 59, 66, .12);
+        border-radius: 30px;
+        background: white;
+        box-shadow: var(--shadow);
+      }
+      .hero-image-wrap::after {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        border: 10px solid rgba(255, 255, 255, .45);
+        border-radius: inherit;
+        pointer-events: none;
+        content: "";
+      }
+      .hero-image { width: 100%; aspect-ratio: 4 / 4.55; object-fit: cover; object-position: center; }
+      .hero-tag {
+        position: absolute;
+        z-index: 2;
+        right: -20px;
+        bottom: 36px;
+        display: grid;
+        width: 162px;
+        min-height: 134px;
+        padding: 18px;
+        border: 1px solid var(--ink);
+        border-radius: 18px;
+        background: var(--lime);
+        box-shadow: 7px 7px 0 var(--ink);
+        transform: rotate(-5deg);
+      }
+      .hero-tag small { font-size: 10px; font-weight: 900; letter-spacing: .12em; }
+      .hero-tag strong { align-self: end; font-size: 24px; letter-spacing: -.07em; line-height: .96; }
+      .hero-tag em { align-self: end; font-size: 11px; font-style: normal; font-weight: 800; }
+
+      .ticker {
+        overflow: hidden;
+        border-top: 1px solid var(--ink);
+        border-bottom: 1px solid var(--ink);
+        background: var(--lime);
+        white-space: nowrap;
+      }
+      .ticker-inner {
+        display: inline-flex;
+        align-items: center;
+        min-width: max-content;
+        padding: 16px 0 15px;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: .08em;
+        animation: marquee 29s linear infinite;
+      }
+      .ticker strong { margin: 0 22px; font-size: 20px; line-height: 0; }
+      @keyframes marquee { to { transform: translateX(-40%); } }
+
+      .section { padding: 116px 0; }
+      .section-intro { max-width: 690px; margin-bottom: 54px; }
+      .section-intro .eyebrow { margin-bottom: 20px; }
+      h2 {
+        margin-bottom: 16px;
+        font-size: clamp(38px, 4.5vw, 62px);
+        font-weight: 900;
+        letter-spacing: -.075em;
+        line-height: 1.03;
+      }
+      .section-intro p {
+        max-width: 570px;
+        margin-bottom: 0;
+        color: var(--ink-soft);
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .story-section { background: var(--paper); }
+      .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .story-card {
+        position: relative;
+        min-height: 548px;
+        overflow: hidden;
+        border: 1px solid rgba(24, 59, 66, .14);
+        border-radius: 22px;
+        background: white;
+        transition: transform .3s ease, box-shadow .3s ease;
+      }
+      .story-card:hover { box-shadow: var(--shadow); transform: translateY(-7px); }
+      .story-card-image { width: 100%; height: 100%; object-fit: cover; }
+      .story-card-caption {
+        position: absolute;
+        right: 18px;
+        bottom: 17px;
+        left: 18px;
+        padding: 16px 16px 15px;
+        border: 1px solid rgba(24, 59, 66, .14);
+        border-radius: 15px;
+        background: rgba(251, 250, 245, .94);
+        backdrop-filter: blur(8px);
+      }
+      .story-card-caption span { display: block; margin-bottom: 5px; color: var(--purple-deep); font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+      .story-card-caption h3 { margin-bottom: 0; font-size: 22px; letter-spacing: -.055em; }
+
+      .feature-section { position: relative; background: var(--ink); color: var(--cream); }
+      .feature-section::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30vw;
+        height: 100%;
+        background: rgba(219, 210, 246, .12);
+        content: "";
+      }
+      .feature-section .wrap { position: relative; z-index: 1; }
+      .feature-section .eyebrow::before { background: var(--coral); }
+      .feature-section h2 { max-width: 720px; margin-bottom: 55px; }
+      .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .feature {
+        position: relative;
+        min-height: 274px;
+        padding: 30px;
+        border: 1px solid rgba(251, 250, 245, .25);
+        border-radius: 20px;
+        background: rgba(251, 250, 245, .04);
+      }
+      .feature:nth-child(1) { background: rgba(219, 210, 246, .16); }
+      .feature:nth-child(2) { background: rgba(200, 237, 57, .12); }
+      .feature:nth-child(3) { background: rgba(243, 156, 130, .13); }
+      .feature:nth-child(4) { background: rgba(251, 250, 245, .06); }
+      .feature-number { color: var(--lime); font-size: 12px; font-weight: 900; letter-spacing: .1em; }
+      .feature h3 { max-width: 250px; margin: 49px 0 11px; font-size: clamp(27px, 3vw, 38px); letter-spacing: -.075em; line-height: 1; }
+      .feature p { max-width: 350px; margin-bottom: 0; color: rgba(251, 250, 245, .74); font-size: 14px; line-height: 1.7; }
+      .feature-mark {
+        position: absolute;
+        top: 28px;
+        right: 26px;
+        color: var(--lime);
+        font-size: 48px;
+        font-weight: 300;
+        line-height: 1;
+      }
+
+      .character-section { padding-bottom: 70px; }
+      .character-grid { display: grid; grid-template-columns: 1.03fr .97fr; align-items: stretch; gap: 32px; }
+      .character-image-box { overflow: hidden; border-radius: 24px; background: #e5def4; }
+      .character-image { width: 100%; height: 100%; min-height: 580px; object-fit: cover; }
+      .character-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 26px 2vw 26px 20px;
+      }
+      .character-copy .eyebrow { margin-bottom: 22px; }
+      .character-copy h2 { margin-bottom: 23px; }
+      .character-copy p { max-width: 440px; color: var(--ink-soft); font-size: 16px; line-height: 1.8; }
+      .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 21px; }
+      .chip { padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; font-weight: 800; }
+      .chip:nth-child(1) { background: var(--purple); }
+      .chip:nth-child(2) { background: var(--lime); }
+      .chip:nth-child(3) { background: #fff; }
+      .small-notice { margin-top: 29px; color: rgba(24, 59, 66, .65); font-size: 12px; line-height: 1.65; }
+
+      .styles-section { background: var(--paper); }
+      .styles-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 28px;
+        margin-bottom: 29px;
+      }
+      .styles-heading .section-intro { margin-bottom: 0; }
+      .styles-count {
+        padding: 13px 16px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        color: var(--ink);
+        background: var(--lime);
+        font-size: 13px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+      .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-bottom: 29px;
+      }
+      .filter-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 39px;
+        padding: 0 13px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        background: rgba(251, 250, 245, .8);
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      }
+      .filter-button:hover { transform: translateY(-2px); border-color: var(--ink); }
+      .filter-button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+      .filter-button span { opacity: .68; font-size: 11px; }
+      .style-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+      .style-card {
+        overflow: hidden;
+        border: 1px solid rgba(24, 59, 66, .13);
+        border-radius: 17px;
+        background: white;
+        transition: transform .25s ease, box-shadow .25s ease;
+      }
+      .style-card:hover { box-shadow: 0 15px 30px rgba(24, 59, 66, .12); transform: translateY(-5px); }
+      .style-card figure { margin: 0; overflow: hidden; background: var(--card-tint, #e7e2f4); }
+      .style-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+      .style-card:hover img { transform: scale(1.035); }
+      .style-card-copy { padding: 13px 14px 15px; }
+      .style-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
+      .style-card-code { color: var(--purple-deep); font-size: 10px; font-weight: 900; letter-spacing: .09em; }
+      .style-card-tone { color: var(--ink-soft); font-size: 10px; font-weight: 800; }
+      .style-card h3 { margin-bottom: 3px; font-size: 21px; letter-spacing: -.06em; line-height: 1; }
+      .style-card p { margin-bottom: 0; color: rgba(24, 59, 66, .68); font-size: 11px; font-weight: 700; }
+      .tone-mint { --card-tint: #dff0da; }
+      .tone-purple { --card-tint: #e4dcf7; }
+      .tone-blue { --card-tint: #d9ebf3; }
+      .tone-coral { --card-tint: #f4dfd8; }
+      .tone-gray { --card-tint: #e4e4e0; }
+      .tone-pink { --card-tint: #f9e0e5; }
+      .tone-champagne { --card-tint: #f4ead6; }
+
+      .spec-block {
+        display: grid;
+        grid-template-columns: .86fr 1.14fr;
+        align-items: center;
+        gap: clamp(28px, 5vw, 70px);
+        padding: clamp(30px, 5vw, 68px);
+        border: 1px solid var(--ink);
+        border-radius: 26px;
+        background: var(--lime);
+      }
+      .spec-copy h2 { font-size: clamp(38px, 4.4vw, 60px); }
+      .spec-copy p { max-width: 390px; margin-bottom: 26px; color: var(--ink-soft); font-size: 15px; line-height: 1.75; }
+      .spec-bullet { display: flex; align-items: baseline; gap: 11px; margin-bottom: 12px; font-size: 13px; font-weight: 800; }
+      .spec-bullet::before { color: var(--coral); font-size: 24px; line-height: 0; content: "•"; }
+      .spec-image { overflow: hidden; border: 1px solid var(--ink); border-radius: 18px; box-shadow: 9px 9px 0 var(--ink); }
+      .spec-image img { width: 100%; }
+
+      .city-section { padding-top: 76px; background: var(--cream); }
+      .city-heading { display: flex; align-items: end; justify-content: space-between; gap: 25px; margin-bottom: 37px; }
+      .city-heading h2 { margin-bottom: 0; }
+      .city-heading p { max-width: 350px; margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+      .city-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+      .city-card { position: relative; overflow: hidden; border-radius: 20px; background: #eee9de; }
+      .city-card img { width: 100%; aspect-ratio: .88; object-fit: cover; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+      .city-card:hover img { transform: scale(1.035); }
+      .city-card figcaption {
+        position: absolute;
+        right: 13px;
+        bottom: 13px;
+        left: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 14px;
+        border: 1px solid rgba(24, 59, 66, .16);
+        border-radius: 12px;
+        background: rgba(251, 250, 245, .92);
+        font-size: 14px;
+        font-weight: 900;
+      }
+      .city-card figcaption small { color: var(--purple-deep); font-size: 10px; letter-spacing: .08em; }
+
+      .closing { padding: 100px 0 64px; background: var(--cream); }
+      .closing-card {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(42px, 7vw, 85px);
+        border-radius: 28px;
+        color: var(--cream);
+        background: var(--purple-deep);
+      }
+      .closing-card::before,
+      .closing-card::after { position: absolute; border-radius: 50%; content: ""; }
+      .closing-card::before { top: -220px; right: -180px; width: 490px; height: 490px; border: 1px solid rgba(251,250,245,.26); }
+      .closing-card::after { right: 25px; bottom: -155px; width: 285px; height: 285px; background: var(--lime); }
+      .closing-content { position: relative; z-index: 1; max-width: 670px; }
+      .closing .eyebrow { color: #e8e2fb; }
+      .closing .eyebrow::before { background: var(--lime); }
+      .closing h2 { margin: 21px 0 18px; font-size: clamp(46px, 6.2vw, 79px); }
+      .closing p { max-width: 490px; margin-bottom: 29px; color: rgba(251, 250, 245, .8); line-height: 1.8; }
+      .closing .button { border-color: var(--cream); color: var(--ink); background: var(--lime); }
+
+      footer { padding: 24px 0 40px; color: rgba(24, 59, 66, .64); font-size: 12px; }
+      .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 25px; border-top: 1px solid var(--line); }
+      .footer-brand { color: var(--ink); font-weight: 900; letter-spacing: -.04em; }
+      .footer-note { text-align: right; }
+
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 820px) {
+        .wrap { width: min(100% - 34px, 620px); }
+        .masthead { padding: 19px 0; }
+        .menu-button { display: grid; place-items: center; }
+        .nav-links {
+          position: absolute;
+          top: 64px;
+          right: 17px;
+          left: 17px;
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px;
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          background: rgba(251, 250, 245, .97);
+          box-shadow: var(--shadow);
+        }
+        .nav-links.is-open { display: flex; }
+        .nav-links a { padding: 13px 14px; }
+        .nav-cta { border: 0; background: var(--lime); }
+        .hero { min-height: 0; padding: 127px 0 55px; background: radial-gradient(circle at 105% 5%, #ddd3f8 0 16%, transparent 16.2%), var(--cream); }
+        .hero::after { display: none; }
+        .hero-grid, .character-grid, .spec-block { grid-template-columns: 1fr; }
+        .hero-grid { gap: 41px; }
+        h1 { max-width: 400px; font-size: clamp(49px, 14vw, 73px); }
+        .hero-description { font-size: 16px; }
+        .hero-tag { right: 1px; bottom: 19px; width: 140px; min-height: 116px; padding: 14px; }
+        .hero-tag strong { font-size: 21px; }
+        .section { padding: 78px 0; }
+        .section-intro { margin-bottom: 34px; }
+        .story-grid, .feature-grid { grid-template-columns: 1fr; }
+        .story-card { min-height: 485px; }
+        .feature-section::before { width: 50vw; }
+        .feature h3 { margin-top: 43px; }
+        .character-section { padding-bottom: 41px; }
+        .character-copy { padding: 6px 2px; }
+        .character-image { min-height: 0; aspect-ratio: 1 / 1.1; }
+        .spec-block { gap: 34px; }
+        .styles-heading { grid-template-columns: 1fr; gap: 15px; }
+        .styles-count { justify-self: start; }
+        .style-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+        .style-card-copy { padding: 11px 11px 13px; }
+        .style-card h3 { font-size: 18px; }
+        .city-heading { display: block; }
+        .city-heading h2 { margin-bottom: 16px; }
+        .city-grid { grid-template-columns: 1fr; }
+        .city-card img { aspect-ratio: 1.08; }
+        .closing { padding: 75px 0 45px; }
+        .closing-card::after { right: -55px; bottom: -150px; }
+        .footer-inner { align-items: flex-start; flex-direction: column; }
+        .footer-note { text-align: left; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .ticker-inner { animation: none; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="masthead">
+        <div class="wrap masthead-inner">
+          <a class="brand" href="#top" aria-label="LETITREE 首页">LETITREE</a>
+          <button class="menu-button" id="menuButton" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="打开导航">☰</button>
+          <nav class="nav-links" id="siteNav" aria-label="主导航">
+            <a href="#story">产品故事</a>
+            <a href="#features">磁吸体验</a>
+            <a href="#styles">款式图鉴</a>
+            <a href="#collection">城市限定</a>
+            <a class="nav-cta" href="#discover">认识球搭子</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="wrap hero-grid">
+            <div class="hero-copy reveal">
+              <div class="eyebrow">Magnetic Pickleball</div>
+              <h1 id="hero-title">球有归位，<br /><span>搭子</span>到位。</h1>
+              <p class="hero-description">LETITREE 磁吸匹克球，把球场上的随身伙伴，做成可以陪你上场、收纳，也值得收藏的一颗球。</p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#story">开始认识它 <span class="arrow">↘</span></a>
+                <a class="button button-light" href="#styles">浏览款式图鉴</a>
+              </div>
+              <div class="hero-note">产品展示网站 · 角色与城市限定持续探索中</div>
+            </div>
+            <div class="hero-visual reveal">
+              <div class="hero-image-wrap">
+                <img class="hero-image" src="assets/hero.png" alt="LETITREE 雾紫章灵磁吸匹克球产品图" />
+              </div>
+              <div class="hero-tag" aria-label="产品标签">
+                <small>LETITREE</small>
+                <strong>你的<br />球搭子</strong>
+                <em>MAGNETIC PICKLEBALL</em>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="ticker" aria-label="产品关键词">
+          <div class="ticker-inner">球有归位 <strong>✦</strong> 搭子到位 <strong>✦</strong> 磁吸收纳 <strong>✦</strong> 陪上场 <strong>✦</strong> 可收藏 <strong>✦</strong> LETITREE <strong>✦</strong> 球有归位 <strong>✦</strong> 搭子到位 <strong>✦</strong> 磁吸收纳 <strong>✦</strong> 陪上场 <strong>✦</strong> 可收藏 <strong>✦</strong> LETITREE <strong>✦</strong></div>
+        </div>
+
+        <section class="section story-section" id="story" aria-labelledby="story-title">
+          <div class="wrap">
+            <div class="section-intro reveal">
+              <div class="eyebrow">A ball with a story</div>
+              <h2 id="story-title">不是一颗孤零零的球，<br />是你上场的球搭子。</h2>
+              <p>从出门前挂上装备，到中场短暂收纳，再到把它送给一起约球的人——LETITREE 让一颗匹克球，多了一点陪伴感。</p>
+            </div>
+            <div class="story-grid">
+              <article class="story-card reveal">
+                <img class="story-card-image" src="assets/gift.png" alt="LETITREE 匹克球送礼与约球场景" loading="lazy" />
+                <div class="story-card-caption"><span>01 · INVITE</span><h3>送礼，也是一次约球</h3></div>
+              </article>
+              <article class="story-card reveal">
+                <img class="story-card-image" src="assets/pickup.png" alt="LETITREE 匹克球磁吸捡球场景" loading="lazy" />
+                <div class="story-card-caption"><span>02 · PICK UP</span><h3>把捡球也变得有趣</h3></div>
+              </article>
+              <article class="story-card reveal">
+                <img class="story-card-image" src="assets/storage.png" alt="LETITREE 匹克球中场收纳场景" loading="lazy" />
+                <div class="story-card-caption"><span>03 · STORE</span><h3>中场休息，球也有归位</h3></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section feature-section" id="features" aria-labelledby="features-title">
+          <div class="wrap">
+            <div class="eyebrow">Why magnetic</div>
+            <h2 id="features-title" class="reveal">用磁吸，把一颗球<br />连接到你的上场日常。</h2>
+            <div class="feature-grid">
+              <article class="feature reveal"><span class="feature-number">01 / ATTACH</span><span class="feature-mark">+</span><h3>随手一挂</h3><p>让球成为装备的一部分，出门前拿起它，就像叫上一个熟悉的球搭子。</p></article>
+              <article class="feature reveal"><span class="feature-number">02 / STORE</span><span class="feature-mark">⊙</span><h3>中场归位</h3><p>比赛、练习或聊天的间隙，给这颗球留一个好找、好放的位置。</p></article>
+              <article class="feature reveal"><span class="feature-number">03 / PLAY</span><span class="feature-mark">↘</span><h3>场上陪伴</h3><p>从捡球到再次开打，让一次次来回都保留一点轻松和玩心。</p></article>
+              <article class="feature reveal"><span class="feature-number">04 / COLLECT</span><span class="feature-mark">✦</span><h3>带点个性</h3><p>角色、配色和城市灵感，让球场装备也能表达你的风格。</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section character-section" id="discover" aria-labelledby="character-title">
+          <div class="wrap character-grid">
+            <div class="character-image-box reveal"><img class="character-image" src="assets/story.png" alt="雾紫章灵 LETITREE 磁吸匹克球角色故事图" loading="lazy" /></div>
+            <div class="character-copy reveal">
+              <div class="eyebrow">Meet the companion</div>
+              <h2 id="character-title">雾紫章灵，<br />为不想被定义的你。</h2>
+              <p>章灵的触手、雾紫的配色和略带怪趣的轮廓，都是这颗球的角色语言。它不必只是“运动用品”，也可以是陪你出现的一个小小标志。</p>
+              <div class="chips" aria-label="产品关键词"><span class="chip">雾紫配色</span><span class="chip">角色感</span><span class="chip">个性上场</span></div>
+              <p class="small-notice">本页呈现的是产品视觉与角色概念；实际款式、配置与发售信息请以品牌后续公布为准。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section styles-section" id="styles" aria-labelledby="styles-title">
+          <div class="wrap">
+            <div class="styles-heading reveal">
+              <div class="section-intro">
+                <div class="eyebrow">Character catalogue</div>
+                <h2 id="styles-title">48 款球搭子，<br />按角色找到你的那一颗。</h2>
+                <p>从萌宠野趣、龙族异兽到灵界怪诞、未来装备与自然造景，当前角色素材库中的 48 款产品都整理在这里。点击分类，即可逐一浏览。</p>
+              </div>
+              <div class="styles-count" id="styleCount" aria-live="polite">正在浏览 48 款</div>
+            </div>
+            <div class="filter-bar" aria-label="按角色类别筛选款式">
+              <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部款式 <span>48</span></button>
+              <button class="filter-button" type="button" data-filter="pet" aria-pressed="false">萌宠野趣 <span>15</span></button>
+              <button class="filter-button" type="button" data-filter="beast" aria-pressed="false">龙族异兽 <span>9</span></button>
+              <button class="filter-button" type="button" data-filter="spirit" aria-pressed="false">灵界怪诞 <span>13</span></button>
+              <button class="filter-button" type="button" data-filter="future" aria-pressed="false">未来装备 <span>5</span></button>
+              <button class="filter-button" type="button" data-filter="nature" aria-pressed="false">自然造景 <span>6</span></button>
+            </div>
+            <div class="style-grid" id="styleGrid" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="spec-title">
+          <div class="wrap">
+            <div class="spec-block reveal">
+              <div class="spec-copy">
+                <div class="eyebrow">Designed to go out</div>
+                <h2 id="spec-title">把一颗球，带进你的日常。</h2>
+                <p>一颗球的体积，刚好装进上场装备与日常表达。尺寸与配置集中呈现在右侧设计说明中，方便在出发前随手带上。</p>
+                <div class="spec-bullet">球径 7.4 cm</div>
+                <div class="spec-bullet">含挂扣长度 &lt; 15 cm</div>
+                <div class="spec-bullet">随套球拍磁条 5 cm</div>
+              </div>
+              <div class="spec-image"><img src="assets/specs.png" alt="LETITREE 磁吸匹克球尺寸与配置视觉说明" loading="lazy" /></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section city-section" id="collection" aria-labelledby="city-title">
+          <div class="wrap">
+            <div class="city-heading reveal">
+              <div><div class="eyebrow">City collection</div><h2 id="city-title">把一座城市，<br />挂在你的球搭子上。</h2></div>
+              <p>为不同城市设想的限定产品视觉。每一颗球，都可以成为一段出发、相遇与约球的记忆。</p>
+            </div>
+            <div class="city-grid">
+              <figure class="city-card reveal"><img src="assets/city-beijing.png" alt="北京限定红熊猫磁吸匹克球概念图" loading="lazy" /><figcaption><span>北京限定</span><small>CONCEPT</small></figcaption></figure>
+              <figure class="city-card reveal"><img src="assets/city-shanghai.png" alt="上海限定红熊猫磁吸匹克球概念图" loading="lazy" /><figcaption><span>上海限定</span><small>CONCEPT</small></figcaption></figure>
+              <figure class="city-card reveal"><img src="assets/city-guangzhou.png" alt="广州限定红熊猫磁吸匹克球概念图" loading="lazy" /><figcaption><span>广州限定</span><small>CONCEPT</small></figcaption></figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="closing" aria-labelledby="closing-title">
+          <div class="wrap">
+            <div class="closing-card reveal">
+              <div class="closing-content">
+                <div class="eyebrow">LETITREE MAGNETIC PICKLEBALL</div>
+                <h2 id="closing-title">下一次上场，<br />带上你的球搭子。</h2>
+                <p>一颗球，也能成为你和球友之间的暗号。认识 LETITREE，从让球有一个归位开始。</p>
+                <a class="button" href="#top">回到顶部 <span class="arrow">↑</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="wrap footer-inner">
+          <div><span class="footer-brand">LETITREE</span> · MAGNETIC PICKLEBALL</div>
+          <div class="footer-note">产品介绍页面 · 城市限定图片为概念展示</div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const styles = [
+        { id: '001', name: '树卫', form: '握拳伏球', tone: 'mint', color: '薄荷绿', group: 'nature' },
+        { id: '002', name: '白猫', form: '哈欠伏球', tone: 'purple', color: '雾紫', group: 'pet' },
+        { id: '003', name: '晨鸡', form: '冠羽伏球', tone: 'blue', color: '冰蓝', group: 'pet' },
+        { id: '004', name: '祈灵', form: '翼怀伏球', tone: 'champagne', color: '香槟米', group: 'spirit' },
+        { id: '005', name: '夜鸮', form: '镂羽伏球', tone: 'gray', color: '雾灰', group: 'pet' },
+        { id: '006', name: '黑熊', form: '棱背伏球', tone: 'coral', color: '柔珊瑚', group: 'pet' },
+        { id: '007', name: '章灵', form: '骨壳伏球', tone: 'purple', color: '雾紫', group: 'spirit' },
+        { id: '008', name: '沼王', form: '冠蛙伏球', tone: 'mint', color: '薄荷绿', group: 'beast' },
+        { id: '009', name: '粉鹭', form: '弯喙伏球', tone: 'blue', color: '冰蓝', group: 'pet' },
+        { id: '010', name: '须翁', form: '锥帽伏球', tone: 'pink', color: '樱花粉', group: 'spirit' },
+        { id: '011', name: '变色龙', form: '折面伏球', tone: 'coral', color: '柔珊瑚', group: 'beast' },
+        { id: '012', name: '光杉', form: '星顶伏球', tone: 'blue', color: '冰蓝', group: 'nature' },
+        { id: '013', name: '荒颅', form: '卷角伏球', tone: 'coral', color: '柔珊瑚', group: 'spirit' },
+        { id: '014', name: '橙龙', form: '翼包伏球', tone: 'blue', color: '冰蓝', group: 'beast' },
+        { id: '015', name: '骨灵', form: '兜帽伏球', tone: 'purple', color: '雾紫', group: 'spirit' },
+        { id: '016', name: '骨蝎', form: '尾钳伏球', tone: 'gray', color: '雾灰', group: 'spirit' },
+        { id: '017', name: '图腾石灵', form: '图腾伏球', tone: 'coral', color: '柔珊瑚', group: 'spirit' },
+        { id: '018', name: '骨客', form: '禅坐伏球', tone: 'mint', color: '薄荷绿', group: 'spirit' },
+        { id: '019', name: '绿鳄', form: '阔吻伏球', tone: 'pink', color: '樱花粉', group: 'pet' },
+        { id: '020', name: '夜鸦', form: '展羽伏球', tone: 'coral', color: '柔珊瑚', group: 'pet' },
+        { id: '021', name: '灰猫', form: '帽须伏球', tone: 'purple', color: '雾紫', group: 'pet' },
+        { id: '022', name: '秋盘', form: '叶舟伏球', tone: 'mint', color: '薄荷绿', group: 'nature' },
+        { id: '023', name: '黄团鸟', form: '抱颊伏球', tone: 'blue', color: '冰蓝', group: 'pet' },
+        { id: '024', name: '蓝座', form: '翻盖伏球', tone: 'champagne', color: '香槟米', group: 'future' },
+        { id: '025', name: '红翼龙', form: '盘尾伏球', tone: 'gray', color: '雾灰', group: 'beast' },
+        { id: '026', name: '石龙', form: '角首伏球', tone: 'coral', color: '柔珊瑚', group: 'beast' },
+        { id: '027', name: '宇航员', form: '星坐伏球', tone: 'blue', color: '冰蓝', group: 'future' },
+        { id: '028', name: '静蛙', form: '禅掌伏球', tone: 'mint', color: '薄荷绿', group: 'nature' },
+        { id: '029', name: '独眼蜥', form: '角帽伏球', tone: 'blue', color: '冰蓝', group: 'beast' },
+        { id: '030', name: '蓝机', form: '圆舱伏球', tone: 'coral', color: '柔珊瑚', group: 'future' },
+        { id: '031', name: '夜狼', form: '卷鬃伏球', tone: 'purple', color: '雾紫', group: 'pet' },
+        { id: '032', name: '高原牛', form: '长毛伏球', tone: 'blue', color: '冰蓝', group: 'pet' },
+        { id: '033', name: '长耳狐', form: '蛋抱伏球', tone: 'mint', color: '薄荷绿', group: 'pet' },
+        { id: '034', name: '石怪', form: '拱翼伏球', tone: 'coral', color: '柔珊瑚', group: 'spirit' },
+        { id: '035', name: '红火箭', form: '云焰伏球', tone: 'blue', color: '冰蓝', group: 'future' },
+        { id: '036', name: '赤龙', form: '螺角伏球', tone: 'gray', color: '雾灰', group: 'beast' },
+        { id: '037', name: '草蜢', form: '跃足伏球', tone: 'champagne', color: '香槟米', group: 'pet' },
+        { id: '038', name: '角面', form: '黑冠伏球', tone: 'coral', color: '柔珊瑚', group: 'spirit' },
+        { id: '039', name: '夜灵', form: '兜骨伏球', tone: 'purple', color: '雾紫', group: 'spirit' },
+        { id: '040', name: '绿龙', form: '短爪伏球', tone: 'pink', color: '樱花粉', group: 'beast' },
+        { id: '041', name: '掌须石灵', form: '掌须伏球', tone: 'blue', color: '冰蓝', group: 'spirit' },
+        { id: '042', name: '幼龙', form: '翼芽伏球', tone: 'mint', color: '薄荷绿', group: 'beast' },
+        { id: '043', name: '大耳狐', form: '绒领伏球', tone: 'purple', color: '雾紫', group: 'pet' },
+        { id: '044', name: '颅石', form: '晶面伏球', tone: 'coral', color: '柔珊瑚', group: 'spirit' },
+        { id: '045', name: '尖塔', form: '格构伏球', tone: 'champagne', color: '香槟米', group: 'nature' },
+        { id: '046', name: '晶玫', form: '旋瓣伏球', tone: 'mint', color: '薄荷绿', group: 'nature' },
+        { id: '047', name: '白盔', form: '风甲伏球', tone: 'blue', color: '冰蓝', group: 'future' },
+        { id: '048', name: '红熊猫', form: '蓬尾伏球', tone: 'mint', color: '薄荷绿', group: 'pet' },
+      ];
+      const styleGrid = document.querySelector('#styleGrid');
+      const styleCount = document.querySelector('#styleCount');
+      const filterButtons = document.querySelectorAll('.filter-button');
+      function renderStyles(filter = 'all') {
+        const visibleStyles = filter === 'all' ? styles : styles.filter((style) => style.group === filter);
+        styleGrid.innerHTML = visibleStyles.map((style) => `
+          <article class="style-card tone-${style.tone}">
+            <figure><img src="assets/styles/${style.id}.jpg" alt="LETITREE ${style.color}${style.form}${style.name}磁吸匹克球" loading="lazy" decoding="async" /></figure>
+            <div class="style-card-copy">
+              <div class="style-card-top"><span class="style-card-code">NO. ${style.id}</span><span class="style-card-tone">${style.color}</span></div>
+              <h3>${style.name}</h3>
+              <p>${style.form}</p>
+            </div>
+          </article>
+        `).join('');
+        styleCount.textContent = `正在浏览 ${visibleStyles.length} 款`;
+      }
+      filterButtons.forEach((button) => button.addEventListener('click', () => {
+        filterButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        renderStyles(button.dataset.filter);
+      }));
+      renderStyles();
+
+      const menuButton = document.querySelector('#menuButton');
+      const siteNav = document.querySelector('#siteNav');
+      menuButton?.addEventListener('click', () => {
+        const open = siteNav.classList.toggle('is-open');
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.textContent = open ? '×' : '☰';
+      });
+      siteNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        siteNav.classList.remove('is-open');
+        menuButton?.setAttribute('aria-expanded', 'false');
+        if (menuButton) menuButton.textContent = '☰';
+      }));
+      const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (motionOk && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+      } else {
+        document.querySelectorAll('.reveal').forEach((element) => element.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>
